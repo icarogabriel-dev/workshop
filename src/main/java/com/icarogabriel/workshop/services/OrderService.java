@@ -1,9 +1,7 @@
 package com.icarogabriel.workshop.services;
 
 import com.icarogabriel.workshop.entities.Order;
-import com.icarogabriel.workshop.entities.User;
 import com.icarogabriel.workshop.repositories.OrderRepository;
-import com.icarogabriel.workshop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

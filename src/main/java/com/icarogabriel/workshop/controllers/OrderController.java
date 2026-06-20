@@ -1,9 +1,7 @@
 package com.icarogabriel.workshop.controllers;
 
 import com.icarogabriel.workshop.entities.Order;
-import com.icarogabriel.workshop.entities.User;
 import com.icarogabriel.workshop.services.OrderService;
-import com.icarogabriel.workshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
