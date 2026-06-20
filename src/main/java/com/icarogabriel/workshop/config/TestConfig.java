@@ -1,8 +1,10 @@
 package com.icarogabriel.workshop.config;
 
+import com.icarogabriel.workshop.entities.Category;
 import com.icarogabriel.workshop.entities.Order;
 import com.icarogabriel.workshop.entities.User;
 import com.icarogabriel.workshop.entities.enums.OrderStatus;
+import com.icarogabriel.workshop.repositories.CategoryRepository;
 import com.icarogabriel.workshop.repositories.OrderRepository;
 import com.icarogabriel.workshop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     public TestConfig(UserRepository userRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
@@ -40,5 +45,10 @@ public class TestConfig implements CommandLineRunner {
         Order order2 = new Order(null, Instant.parse("2026-01-04T01:56:22Z"), OrderStatus.PAID, user1);
         Order order3 = new Order(null, Instant.parse("2026-06-25T14:06:39Z"), OrderStatus.WAITING_PAYMENT, user2);
         orderRepository.saveAll(List.of(order1, order2, order3));
+
+        Category category1 = new Category(null, "Electronics");
+        Category category2 = new Category(null, "Books");
+        Category category3 = new Category(null, "Fashion");
+        categoryRepository.saveAll(List.of(category1, category2, category3));
     }
 }
