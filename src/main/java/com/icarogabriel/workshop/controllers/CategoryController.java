@@ -1,7 +1,7 @@
 package com.icarogabriel.workshop.controllers;
 
-import com.icarogabriel.workshop.entities.Order;
-import com.icarogabriel.workshop.services.OrderService;
+import com.icarogabriel.workshop.entities.Category;
+import com.icarogabriel.workshop.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/orders")
-public class OrderController {
+@RequestMapping(value = "/categories")
+public class CategoryController {
 
     @Autowired
-    private OrderService orderService;
+    private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll() {
-        List<Order> listOrders = orderService.findAll();
-        return ResponseEntity.ok().body(listOrders);
+    public ResponseEntity<List<Category>> findAll() {
+        List<Category> listCategories = categoryService.findAll();
+        return ResponseEntity.ok().body(listCategories);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
-        Order obj = orderService.findById(id);
+    public ResponseEntity<Category> findById(@PathVariable Long id) {
+        Category obj = categoryService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 }
