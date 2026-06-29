@@ -1,14 +1,8 @@
 package com.icarogabriel.workshop.config;
 
-import com.icarogabriel.workshop.entities.Category;
-import com.icarogabriel.workshop.entities.Order;
-import com.icarogabriel.workshop.entities.Product;
-import com.icarogabriel.workshop.entities.User;
+import com.icarogabriel.workshop.entities.*;
 import com.icarogabriel.workshop.entities.enums.OrderStatus;
-import com.icarogabriel.workshop.repositories.CategoryRepository;
-import com.icarogabriel.workshop.repositories.OrderRepository;
-import com.icarogabriel.workshop.repositories.ProductRepository;
-import com.icarogabriel.workshop.repositories.UserRepository;
+import com.icarogabriel.workshop.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -34,9 +28,16 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
-    public TestConfig(UserRepository userRepository, OrderRepository orderRepository) {
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    public TestConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository,
+    ProductRepository productRepository, OrderItemRepository orderItemRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
+        this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Override
@@ -71,5 +72,12 @@ public class TestConfig implements CommandLineRunner {
         product4.getCategories().add(category1);
         product5.getCategories().add(category5);
         productRepository.saveAll(List.of(product1, product2, product3, product4, product5));
+
+        OrderItem orderItem1 = new OrderItem(order1, product1, 2, product1.getPrice());
+        OrderItem orderItem2 = new OrderItem(order1, product3, 1, product3.getPrice());
+        OrderItem orderItem3 = new OrderItem(order2, product4, 4, product4.getPrice());
+        OrderItem orderItem4 = new OrderItem(order3, product5, 3, product5.getPrice());
+        OrderItem orderItem5 = new OrderItem(order2, product2, 7, product2.getPrice());
+        orderItemRepository.saveAll(List.of(orderItem1, orderItem2, orderItem3, orderItem4, orderItem5));
     }
 }
