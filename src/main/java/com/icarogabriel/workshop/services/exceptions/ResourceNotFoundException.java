@@ -1,4 +1,4 @@
-package exceptions;
+package com.icarogabriel.workshop.services.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 
