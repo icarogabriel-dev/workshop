@@ -1,5 +1,6 @@
 package com.icarogabriel.workshop.controllers.exceptions;
 
+import com.icarogabriel.workshop.services.exceptions.DatabaseException;
 import com.icarogabriel.workshop.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -20,4 +21,11 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(StandErr);
     }
 
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<StandardError> databaseException(DatabaseException e, HttpServletRequest request) {
+        String error = "Database error";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError StandErr = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(StandErr);
+    }
 }
